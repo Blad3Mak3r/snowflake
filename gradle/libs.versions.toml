@@ -3,6 +3,7 @@
 
 [versions]
 coroutines = "1.10.2"
+mavenPublish = "0.34.0"
 
 [libraries]
 coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -12,3 +13,4 @@ coroutines = ["coroutinesCore"]
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version = "2.2.0" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
