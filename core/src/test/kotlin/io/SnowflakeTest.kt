@@ -1,9 +1,11 @@
-package io.github.blad3mak3r.snowflake
+package io
 
+import io.github.blad3mak3r.snowflake.core.SnowflakeGenerator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -25,7 +27,7 @@ class SnowflakeTest {
         val n = 50_000
         val concurrency = 200
         val results = mutableListOf<Long>()
-        val queue = java.util.concurrent.ConcurrentLinkedQueue<Long>()
+        val queue = ConcurrentLinkedQueue<Long>()
 
         coroutineScope {
             repeat(concurrency) {

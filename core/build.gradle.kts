@@ -35,10 +35,10 @@ java {
 }
 
 mavenPublishing {
-    coordinates("io.github.blad3mak3r.snowflake", "core", "$version")
+    coordinates("io.github.blad3mak3r.snowflake", "snowflake-core", "$version")
 
     pom {
-        name.set(project.name)
+        name.set("snowflake-core")
         description.set("Advanced coroutines-based Snowflakes generator")
         url.set("https://github.com/Blad3Mak3r/snowflkae")
         issueManagement {

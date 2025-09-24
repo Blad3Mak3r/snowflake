@@ -3,10 +3,12 @@
 
 [versions]
 coroutines = "1.10.2"
+exposed = "0.61.0"
 mavenPublish = "0.34.0"
 
 [libraries]
 coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+exposedCore = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
 
 [bundles]
 coroutines = ["coroutinesCore"]

@@ -1,4 +1,4 @@
-package io.github.blad3mak3r.snowflake
+package io.github.blad3mak3r.snowflake.core
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.yield
@@ -45,7 +45,7 @@ class SnowflakeGenerator(
         if (ts < lastTimestamp) {
             when (onClockBackwards) {
                 ClockBackwardsStrategy.WAIT -> ts = waitUntil(lastTimestamp)
-                ClockBackwardsStrategy.THROW -> throw IllegalStateException("Clock moved backwards")
+                ClockBackwardsStrategy.THROW -> error("Clock moved backwards")
                 ClockBackwardsStrategy.IGNORE -> {}
             }
         }

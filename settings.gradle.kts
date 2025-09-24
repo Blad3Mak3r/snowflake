@@ -12,4 +12,4 @@ plugins {
 }
 
 rootProject.name = "snowflake"
-include("lib")
+include("core", "exposed")
