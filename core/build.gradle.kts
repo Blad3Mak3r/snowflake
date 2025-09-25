@@ -17,6 +17,16 @@ dependencies {
     api(libs.bundles.coroutines)
 }
 
+val gitTagProvider = providers.exec {
+    commandLine("git", "describe", "--tags", "--abbrev=0")
+}.standardOutput.asText.map { it.trim() }.orNull
+
+val gitHashProvider = providers.exec {
+    commandLine("git", "rev-parse", "--short", "HEAD")
+}.standardOutput.asText.map { it.trim() }.orNull
+
+version = gitTagProvider ?: gitHashProvider ?: "dev"
+
 testing {
     suites {
         // Configure the built-in test suite
