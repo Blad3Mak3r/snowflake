@@ -1,4 +1,4 @@
-package io.github.blad3mak3r.snowflake.exposed
+package io.github.blad3mak3r.snowflake.exposed.core
 
 import io.github.blad3mak3r.snowflake.core.SnowflakeGenerator
 import kotlinx.coroutines.runBlocking

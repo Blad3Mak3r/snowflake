@@ -15,25 +15,11 @@ repositories {
 
 dependencies {
     implementation(project(":core"))
-    implementation(project(":exposed"))
+    implementation(project(":exposed-core"))
 
     compileOnly(libs.exposedCore)
     compileOnly(libs.exposedDao)
 }
-
-val gitTagProvider = providers.exec {
-    commandLine("git", "describe", "--tags", "--abbrev=0")
-    workingDir = rootProject.projectDir
-    isIgnoreExitValue = true
-}.standardOutput.asText.map { it.trim() }.orNull
-
-val gitHashProvider = providers.exec {
-    commandLine("git", "rev-parse", "--short", "HEAD")
-    workingDir = rootProject.projectDir
-    isIgnoreExitValue = true
-}.standardOutput.asText.map { it.trim() }.orNull
-
-version = gitTagProvider ?: gitHashProvider ?: "dev"
 
 testing {
     suites {

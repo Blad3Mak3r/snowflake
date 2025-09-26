@@ -19,20 +19,6 @@ dependencies {
     compileOnly(libs.exposedCore)
 }
 
-val gitTagProvider = providers.exec {
-    commandLine("git", "describe", "--tags", "--abbrev=0")
-    workingDir = rootProject.projectDir
-    isIgnoreExitValue = true
-}.standardOutput.asText.map { it.trim() }.orNull
-
-val gitHashProvider = providers.exec {
-    commandLine("git", "rev-parse", "--short", "HEAD")
-    workingDir = rootProject.projectDir
-    isIgnoreExitValue = true
-}.standardOutput.asText.map { it.trim() }.orNull
-
-version = gitTagProvider ?: gitHashProvider ?: "dev"
-
 testing {
     suites {
         // Configure the built-in test suite
