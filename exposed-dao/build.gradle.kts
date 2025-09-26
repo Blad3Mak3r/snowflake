@@ -14,8 +14,8 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":core"))
-    implementation(project(":exposed-core"))
+    compileOnly(project(":core"))
+    compileOnly(project(":exposed"))
 
     compileOnly(libs.exposedCore)
     compileOnly(libs.exposedDao)

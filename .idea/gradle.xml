@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/exposed-core" />
+            <option value="$PROJECT_DIR$/exposed" />
             <option value="$PROJECT_DIR$/exposed-dao" />
           </set>
         </option>
