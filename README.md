@@ -1,113 +1,44 @@
-# Kotlin Snowflake Generator
+## Instalación
 
-A lightweight Kotlin library for generating unique, distributed Twitter-style Snowflake IDs with coroutine-safe concurrency.
+### Artífices y ejemplos
 
-## ✨ Features
+- **Exposed DAO integration (opcional):**  
+  `io.github.blad3mak3r.snowflake:snowflake-exposed-dao`
 
-- 🚀 **Coroutine-safe**: uses `Mutex` to prevent duplicate IDs under heavy concurrency.  
-- 🏗 **Configurable node**: supports both `datacenterId` and `workerId` fields (5 bits each).  
-- ⏱ **41-bit timestamp**: millisecond precision since a custom epoch.  
-- 🔄 **12-bit sequence**: up to 4096 IDs per millisecond, per node.  
-- 🗄 **Exposed integration**: separate module with JetBrains Exposed extensions (custom column types & helpers).  
-- ✅ **Battle-tested**: includes concurrency and overflow tests.  
-- 📦 **Multi-module**:  
-  - `core`: the generator itself.  
-  - `exposed`: database helpers for Exposed.  
+#### Gradle
 
-Ideal for distributed systems, microservices, or databases requiring sortable, unique identifiers without relying on UUIDs.
+    implementation("io.github.blad3mak3r.snowflake:snowflake-exposed-dao:1.0.0") // opcional
 
----
+#### Maven
 
-## 📦 Installation
+    <dependency>
+      <groupId>io.github.blad3mak3r.snowflake</groupId>
+      <artifactId>snowflake-exposed-dao</artifactId>
+      <version>1.0.0</version>
+    </dependency>
 
-This library is available via [Maven Central](https://search.maven.org/).
-
-### Artifacts
-
-- **Core:**  
-  `io.github.blad3mak3r.snowflake:snowflake-core`
-- **Exposed integration (optional):**  
-  `io.github.blad3mak3r.snowflake:snowflake-exposed`
-
-<details>
-<summary>Gradle (Kotlin DSL)</summary>
-
-```kotlin
-dependencies {
-    implementation("io.github.blad3mak3r.snowflake:snowflake-core:1.0.0")
-    implementation("io.github.blad3mak3r.snowflake:snowflake-exposed:1.0.0") // optional
-}
-```
-</details>
-
-<details>
-<summary>Maven</summary>
-
-```xml
-<dependency>
-  <groupId>io.github.blad3mak3r.snowflake</groupId>
-  <artifactId>snowflake-core</artifactId>
-  <version>1.0.0</version>
-</dependency>
-<dependency>
-  <groupId>io.github.blad3mak3r.snowflake</groupId>
-  <artifactId>snowflake-exposed</artifactId>
-  <version>1.0.0</version>
-</dependency>
-```
-</details>
-
----
-
-## 🚀 Usage
-
-### Core
-
-```kotlin
-import com.tuorg.snowflake.SnowflakeGenerator
-
-suspend fun main() {
-    val generator = SnowflakeGenerator(datacenterId = 1, workerId = 2)
-    val id = generator.nextId()
-
-    println("Snowflake ID: $id")
-    println("Timestamp: ${generator.extractTimestamp(id)}")
-    println("Datacenter: ${generator.extractDatacenterId(id)}")
-    println("Worker: ${generator.extractWorkerId(id)}")
-    println("Sequence: ${generator.extractSequence(id)}")
-}
-```
+## Uso
 
 ### Exposed integration
 
+#### Exposed DAO integration
+
 ```kotlin
 import com.tuorg.snowflake.exposed.snowflake
-import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.dao.LongEntity
+import org.jetbrains.exposed.dao.LongEntityClass
+import org.jetbrains.exposed.dao.id.EntityID
+import org.jetbrains.exposed.dao.id.LongIdTable
 
-object Users : Table("users") {
-    val id = snowflake("id")
+object Users : LongIdTable("users") {
+    override val id = snowflake("id").entityId()
     val name = varchar("name", 50)
+}
+
+class User(id: EntityID<Long>) : LongEntity(id) {
+    companion object : LongEntityClass<User>(Users)
+    var name by Users.name
 }
 ```
 
----
-
-## 🧪 Testing
-
-Run the test suite:
-
-```bash
-./gradlew test
-```
-
-Tests include:
-- Concurrency safety
-- Monotonic ordering
-- Sequence overflow handling
-- Extraction of timestamp, datacenter, worker, and sequence
-
----
-
-## 📜 License
-
-MIT License © 2025
+Así se muestra cómo definir una tabla y una entidad usando el campo snowflake como ID con Exposed DAO.
