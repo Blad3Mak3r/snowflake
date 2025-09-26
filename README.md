@@ -21,7 +21,7 @@ Ideal for distributed systems, microservices, or databases requiring sortable, u
 
 ## 📦 Installation
 
-This library is available via [Maven Central](https://search.maven.org/).
+This library is available via [Maven Central](https://central.sonatype.com/namespace/io.github.blad3mak3r.snowflake).
 
 ### Artifacts
 
