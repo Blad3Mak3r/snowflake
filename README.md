@@ -12,7 +12,8 @@ A lightweight Kotlin library for generating unique, distributed Twitter-style Sn
 - ✅ **Battle-tested**: includes concurrency and overflow tests.  
 - 📦 **Multi-module**:  
   - `core`: the generator itself.  
-  - `exposed`: database helpers for Exposed.  
+  - `exposed`: database helpers for Exposed.
+  - `exposed-dae`: database helpers for Exposed DAO.
 
 Ideal for distributed systems, microservices, or databases requiring sortable, unique identifiers without relying on UUIDs.
 
@@ -24,18 +25,47 @@ This library is available via [Maven Central](https://search.maven.org/).
 
 ### Artifacts
 
-- **Core:**  
-  `io.github.blad3mak3r.snowflake:snowflake-core`
-- **Exposed integration (optional):**  
-  `io.github.blad3mak3r.snowflake:snowflake-exposed`
+| Module      | Artifact                                               |
+| ----------- | ------------------------------------------------------ |
+| Core        | `io.github.blad3mak3r.snowflake:snowflake-core`        |
+| Exposed     | `io.github.blad3mak3r.snowflake:snowflake-exposed`     |
+| Exposed DAO | `io.github.blad3mak3r.snowflake:snowflake-exposed-dao` |
+
+<details>
+<summary>Gradle (Version Catalog)</summary>
+
+## libs.versions.toml
+```toml
+[versions]
+snowdlake = "X.Y.Z"
+
+[libraries]
+snowflakeCore = { module = "io.github.blad3mak3r.snowflake:snowflake-core", version.ref = "snowflake" }
+snowflakeExposed = { module = "io.github.blad3mak3r.snowflake:snowflake-exposed", version.ref = "snowflake" }
+snowflakeExposedDao = { module = "io.github.blad3mak3r.snowflake:snowflake-exposed-dao", version.ref = "snowflake" }
+
+[bundles]
+snowflake = ["snowflakeCore", "snowflakeExposed", "snowflakeExposedDao"]
+```
+
+## build.gradle.kts
+```kotlin
+dependencies {
+    implementation(libs.bundles.snowflake)
+}
+```
+
+</details>
 
 <details>
 <summary>Gradle (Kotlin DSL)</summary>
 
+## build.gradle.kts
 ```kotlin
 dependencies {
-    implementation("io.github.blad3mak3r.snowflake:snowflake-core:1.0.0")
-    implementation("io.github.blad3mak3r.snowflake:snowflake-exposed:1.0.0") // optional
+    implementation("io.github.blad3mak3r.snowflake:snowflake-core:X.Y.Z")
+    implementation("io.github.blad3mak3r.snowflake:snowflake-exposed:X.Y.Z") // optional
+    implementation("io.github.blad3mak3r.snowflake:snowflake-exposed-dao:X.Y.Z") // optional
 }
 ```
 </details>
@@ -43,16 +73,22 @@ dependencies {
 <details>
 <summary>Maven</summary>
 
+## pom.xml
 ```xml
 <dependency>
   <groupId>io.github.blad3mak3r.snowflake</groupId>
   <artifactId>snowflake-core</artifactId>
-  <version>1.0.0</version>
+  <version>X.Y.Z</version>
 </dependency>
 <dependency>
   <groupId>io.github.blad3mak3r.snowflake</groupId>
   <artifactId>snowflake-exposed</artifactId>
-  <version>1.0.0</version>
+  <version>X.Y.Z</version>
+</dependency>
+<dependency>
+  <groupId>io.github.blad3mak3r.snowflake</groupId>
+  <artifactId>snowflake-exposed-dao</artifactId>
+  <version>X.Y.Z</version>
 </dependency>
 ```
 </details>
