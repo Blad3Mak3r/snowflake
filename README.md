@@ -20,13 +20,22 @@ Ideal for distributed systems, microservices, or databases requiring sortable, u
 
 ## 📦 Installation
 
+This library is available via [Maven Central](https://search.maven.org/).
+
+### Artifacts
+
+- **Core:**  
+  `io.github.blad3mak3r.snowflake:snowflake-core`
+- **Exposed integration (optional):**  
+  `io.github.blad3mak3r.snowflake:snowflake-exposed`
+
 <details>
 <summary>Gradle (Kotlin DSL)</summary>
 
 ```kotlin
 dependencies {
-    implementation("com.tuorg:snowflake-core:1.0.0")
-    implementation("com.tuorg:snowflake-exposed:1.0.0") // optional
+    implementation("io.github.blad3mak3r.snowflake:snowflake-core:1.0.0")
+    implementation("io.github.blad3mak3r.snowflake:snowflake-exposed:1.0.0") // optional
 }
 ```
 </details>
@@ -36,12 +45,12 @@ dependencies {
 
 ```xml
 <dependency>
-  <groupId>com.tuorg</groupId>
+  <groupId>io.github.blad3mak3r.snowflake</groupId>
   <artifactId>snowflake-core</artifactId>
   <version>1.0.0</version>
 </dependency>
 <dependency>
-  <groupId>com.tuorg</groupId>
+  <groupId>io.github.blad3mak3r.snowflake</groupId>
   <artifactId>snowflake-exposed</artifactId>
   <version>1.0.0</version>
 </dependency>
