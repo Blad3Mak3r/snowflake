@@ -39,7 +39,7 @@ java {
 }
 
 mavenPublishing {
-    coordinates("io.github.blad3mak3r.snowflake", "snowflake-exposed", "$version")
+    coordinates("io.github.blad3mak3r.snowflake", "snowflake-exposed-dao", "$version")
 
     pom {
         name.set("snowflake-exposed-dao")
