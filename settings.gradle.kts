@@ -12,4 +12,4 @@ plugins {
 }
 
 rootProject.name = "snowflake"
-include("core", "exposed")
+include("core", "exposed", "exposed-dao")
