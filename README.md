@@ -13,7 +13,7 @@ A lightweight Kotlin library for generating unique, distributed Twitter-style Sn
 - 📦 **Multi-module**:  
   - `core`: the generator itself.  
   - `exposed`: database helpers for Exposed.
-  - `exposed-dae`: database helpers for Exposed DAO.
+  - `exposed-dao`: database helpers for Exposed DAO.
 
 Ideal for distributed systems, microservices, or databases requiring sortable, unique identifiers without relying on UUIDs.
 
