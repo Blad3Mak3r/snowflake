@@ -2,9 +2,9 @@ package io.github.blad3mak3r.snowflake.exposed.dao
 
 import io.github.blad3mak3r.snowflake.core.SnowflakeGenerator
 import kotlinx.coroutines.runBlocking
-import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.dao.id.IdTable
-import org.jetbrains.exposed.sql.Column
+import org.jetbrains.exposed.v1.core.Column
+import org.jetbrains.exposed.v1.core.dao.id.EntityID
+import org.jetbrains.exposed.v1.core.dao.id.IdTable
 
 open class SnowflakeIdTable(
     name: String,

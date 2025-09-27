@@ -3,7 +3,7 @@
 
 [versions]
 coroutines = "1.10.2"
-exposed = "0.61.0"
+exposed = "1.0.0-rc-1"
 mavenPublish = "0.34.0"
 
 [libraries]
