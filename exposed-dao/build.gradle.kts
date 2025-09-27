@@ -14,8 +14,8 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":core"))
-    implementation(project(":exposed-core"))
+    compileOnly(project(":core"))
+    compileOnly(project(":exposed"))
 
     compileOnly(libs.exposedCore)
     compileOnly(libs.exposedDao)
@@ -39,12 +39,12 @@ java {
 }
 
 mavenPublishing {
-    coordinates("io.github.blad3mak3r.snowflake", "snowflake-exposed", "$version")
+    coordinates("io.github.blad3mak3r.snowflake", "snowflake-exposed-dao", "$version")
 
     pom {
         name.set("snowflake-exposed-dao")
         description.set("Advanced coroutines-based Snowflakes generator")
-        url.set("https://github.com/Blad3Mak3r/snowflkae")
+        url.set("https://github.com/Blad3Mak3r/snowflake")
         issueManagement {
             system.set("GitHub")
             url.set("https://github.com/Blad3Mak3r/snowflake/issues")
