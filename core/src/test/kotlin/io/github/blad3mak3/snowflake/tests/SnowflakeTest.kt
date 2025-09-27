@@ -1,4 +1,4 @@
-package io
+package io.github.blad3mak3.snowflake.tests
 
 import io.github.blad3mak3r.snowflake.core.SnowflakeFactory
 import kotlinx.coroutines.Dispatchers
