@@ -1,6 +1,6 @@
-package io
+package io.github.blad3mak3.snowflake.tests
 
-import io.github.blad3mak3r.snowflake.core.SnowflakeGenerator
+import io.github.blad3mak3r.snowflake.core.SnowflakeFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -11,14 +11,14 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class SnowflakeTest {
-    private val generator = SnowflakeGenerator(
+    private val factory = SnowflakeFactory(
         datacenterId = 1,
         workerId = 2
     )
 
     @Test
     fun `generate single id`() = runBlocking {
-        val id = generator.nextId()
+        val id = factory.nextId()
         assertTrue(id > 0, "ID debe ser positivo")
     }
 
@@ -33,7 +33,7 @@ class SnowflakeTest {
             repeat(concurrency) {
                 launch(Dispatchers.Default) {
                     repeat(n / concurrency) {
-                        queue.add(generator.nextId())
+                        queue.add(factory.nextId())
                     }
                 }
             }
@@ -48,31 +48,28 @@ class SnowflakeTest {
     @Test
     fun `ids should be ordered`() = runBlocking {
         val ids = buildList {
-            repeat(1_000) { add(generator.nextId()) }
+            repeat(1_000) { add(factory.nextId()) }
         }
         assertTrue(ids == ids.sorted(), "Los IDs deben ser monotonicos")
     }
 
     @Test
     fun `extracted parts should match`() = runBlocking {
-        val id = generator.nextId()
+        val id = factory.nextId()
 
-        val timestamp = generator.extractTimestamp(id)
-        val datacenter = generator.extractDatacenterId(id)
-        val worker = generator.extractWorkerId(id)
-        val sequence = generator.extractSequence(id)
+        val decoded = factory.decode(id)
 
-        assertTrue(timestamp > 0, "timestamp debe ser positivo")
-        assertEquals(1, datacenter, "datacenterId debe ser 1")
-        assertEquals(2, worker, "workerId debe ser 2")
-        assertTrue(sequence >= 0, "sequence debe ser >= 0")
+        assertTrue(decoded.timestamp > 0, "timestamp debe ser positivo")
+        assertEquals(1, decoded.datacenterId, "datacenterId debe ser 1")
+        assertEquals(2, decoded.workerId, "workerId debe ser 2")
+        assertTrue(decoded.sequence >= 0, "sequence debe ser >= 0")
     }
 
     @Test
     fun `sequence should overflow correctly`() = runBlocking {
         val ids = mutableListOf<Long>()
         repeat(5000) {
-            ids.add(generator.nextId())
+            ids.add(factory.nextId())
         }
         assertEquals(ids.size, ids.toSet().size, "Incluso tras overflow no debe haber duplicados")
     }

@@ -17,6 +17,11 @@ dependencies {
     compileOnly(project(":core"))
 
     compileOnly(libs.exposedCore)
+
+    testImplementation(project(":core"))
+    testImplementation(libs.exposedCore)
+    testImplementation(libs.exposedR2dbc)
+    testImplementation("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
 }
 
 testing {
